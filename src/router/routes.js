@@ -439,7 +439,7 @@ router.patch(
 router.post(
   '/createDispute',
   authenticate,
-  upload.array('images', 10),
+  // upload.array('images', 10),
   createDispute,
 );
 router.get('/getDispute/:userId', authenticate, getDisputes);

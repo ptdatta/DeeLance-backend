@@ -53,22 +53,22 @@ const createDispute = async (req, res) => {
           'You are not authorized to initiate this dispute. Only the client or freelancer can initiate a dispute.',
       });
     }
-    const uploadPromises = req.files.map(async file => {
-      const uploadResult = await uploadOnCloudinary(file.path);
-      if (!uploadResult || !uploadResult.url) {
-        throw new Error('Image not uploaded to Cloudinary');
-      }
-      return { url: uploadResult.url };
-    });
+    
+    // const uploadPromises = req.files.map(async file => {
+    //   const uploadResult = await uploadOnCloudinary(file.path);
+    //   if (!uploadResult || !uploadResult.url) {
+    //     throw new Error('Image not uploaded to Cloudinary');
+    //   }
+    //   return { url: uploadResult.url };
+    // });
 
-    const uploadedImages = await Promise.all(uploadPromises);
+    // const uploadedImages = await Promise.all(uploadPromises);
 
     const newDispute = new Dispute({
       orderId,
       clientId,
       freelancerId,
       reason,
-      images: uploadedImages,
       initiatedBy: req.user._id,
       status: 'open',
       createdAt: Date.now(),
