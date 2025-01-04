@@ -420,7 +420,7 @@ router.patch('/order/:orderId/withdraw', authenticate, withdrawOrder);
 // );
 router.patch(
   '/order/:orderId/ordercomplete',
-  // Assuming you have an authentication middleware
+  authenticate,// Assuming you have an authentication middleware
   upload.array('files', 5), // Allow up to 5 files to be uploaded
   freelancerCompleteOrder,
 );
