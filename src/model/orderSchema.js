@@ -44,6 +44,10 @@ const orderSchema = new mongoose.Schema({
     ref: 'Dispute',
   },
   revision: { type: Number, default: 3 },
+  revisionReason: {
+    type: String,
+    required: false,
+  },
   reasonForDecline: {
     type: String,
     maxlength: 160,

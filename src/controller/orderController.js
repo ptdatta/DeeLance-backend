@@ -379,6 +379,7 @@ const freelancerCompleteOrder = async (req, res) => {
         const uploadedFile = await uploadOnCloudinary(file.path);
         if (uploadedFile) {
           cloudinaryUrls.push(uploadedFile.secure_url);
+          order.files.push(uploadedFile.secure_url);
         } else {
           throw new Error(`Failed to upload file ${file.originalname}`);
         }
@@ -440,8 +441,8 @@ const orderStatusDelivered = async (req, res) => {
   }
 };
 const orderStatusRevision = async (req, res) => {
-  const { orderId } = req.params;
-
+  const { orderId,reason} = req.body;
+  
   try {
     const order = await Order.findById(orderId);
     if (!order) {
@@ -465,6 +466,7 @@ const orderStatusRevision = async (req, res) => {
     if (order.revision > 0) {
       order.revision -= 1; // Decrease revision count
       order.status = 'revision'; // Update order status to 'revision'
+      order.revisionReason = reason; // Set the revision reason
       await order.save();
 
       return res.status(200).json({

@@ -430,7 +430,7 @@ router.patch(
   orderStatusDelivered,
 );
 router.patch(
-  '/order/:orderId/orderRevision',
+  '/orderRevision',
   authenticate,
   orderStatusRevision,
 );
