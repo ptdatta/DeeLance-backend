@@ -425,7 +425,7 @@ router.patch(
   freelancerCompleteOrder,
 );
 router.patch(
-  '/order/:orderId/orderDeliverd',
+  '/order/:orderId/orderDelivered',
   authenticate,
   orderStatusDelivered,
 );
